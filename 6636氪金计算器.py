@@ -428,24 +428,63 @@ def hans3():
     v1 = StringVar()
     e2 = Entry(root3, width=10, textvariable=v1, state='readonly').grid(row=4, column=1)
 
-    def Factorize():
+   def Factorize():
         n=eval(e1.get())
-        num=n    #使用num变量保留输入的原始数值
-        m=[]
-        while n!=1:    #n==1时，已分解到最后一个质因数
-            for i in range(2,int(n+1)):
-                if n % i == 0:
-                    m.append(str(i))    #将i转化为字符串再追加到列表中，便于使用join函数进行输出
-                    for x in range(2,int(i)):
-                        if i % x == 0:
-                            a = i/x
-                            if a != 1:
-                                m.pop()
-                                continue
-                    n = n/i
-            if n==1:
-                break    #n==1时，循环停止
-        v1.set(m)
+        num = n
+        # 判断输入是否为素数
+        def prime(n):
+            if n in {2, 3, 5, 7, 11}:
+                return True
+            if n % 2 == 0 or n % 3 == 0 or n % 5 == 0 or n % 7 == 0 or n % 11 == 0:
+                return False
+            t = 0
+            u = n - 1
+            while u % 2 == 0:
+                t += 1
+                u //= 2
+            a = random.randint(2, n - 1)
+            r = pow(a, u, n)
+            if r != 1:
+                while t > 1 and r != n - 1:
+                    r = (r * r) % n
+                    t -= 1
+                if r != n - 1:
+                    return False
+            return True
+        
+        # 寻找输入的一个因数
+        def find(n, a):
+            def f(x):
+                return (x * x + a) % n
+            
+            # 补上因子为2的判定
+            if n % 2 == 0:
+                return 2
+            
+            x1 = random.randint(0, n)
+            x2 = x1
+            while True:
+                x1 = f(x1)
+                x2 = f(f(x2))
+                p = math.gcd(abs(x2-x1), n)
+                if p > 1:
+                    return p
+                if x1 == x2:
+                    return n
+        
+        while num != 1:
+            if prime(num):
+                m.append(num)
+                break
+            else:
+                c = find(num, random.randint(0, num-1))
+                if prime(c):
+                    m.append(c)
+                    num //= c
+        
+        m.sort()
+        v1.set("x".join(map(str, m)))
+        m.clear()
 
     Button(root3, text='计算', width=10, command=Factorize).grid(row=4, column=0, sticky=W, padx=10, pady=5)
 
