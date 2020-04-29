@@ -166,7 +166,7 @@ def hans1():
     def log1(entry):
         input = entry.get()
         num2= float(input.strip())
-        temp = math.log(a, num2)
+        temp = math.log(num2, a)
         b = round(temp, 4)
         clear(entry)
         entry.insert(END, b)
@@ -290,7 +290,6 @@ def hans2():
     root2.title('解方程')
     root2.geometry('250x90')
     root2.resizable(0,0)
-
     frame = Frame(root2)
     
     def hans21():
@@ -382,7 +381,7 @@ def hans2():
         e3.grid(row=3, column=1, padx=10, pady=5)
 
         v1 = StringVar()
-        e4 = Entry(root23, width=10, textvariable=v1, state='readonly').grid(row=4, column=1)
+        e4 = Entry(root23, width=20, textvariable=v1, state='readonly').grid(row=4, column=1)
         
         def quadratic():
             a = float(e1.get())
@@ -402,11 +401,11 @@ def hans2():
                 if q > 0:
                     x1 = (-b + math.sqrt(q)) / a / 2
                     x2 = (-b - math.sqrt(q)) / a / 2
-                    d = "一元二次方程的解为x1=%.2f，x2=%.2f" % (x1, x2)
+                    d = "解为x1=%.2f，x2=%.2f" % (x1, x2)
                 elif q == 0:
                     x1 = -b / a / 2
                     x2 = x1
-                    d = "一元二次方程的解相同，x1=x2=%.2f" % (x1)
+                    d = "解相同，x1=x2=%.2f" % (x1)
                 else:
                     pass
                     d = "一元二次方程无解"
@@ -421,6 +420,9 @@ def hans2():
     Button22.pack()
     Button23 = Button(root2, text='求一元二次方程', width=20, command = hans23)
     Button23.pack()
+    #Button21 = Button(root2, text='求一元一次方程', width=20, command = hans21).grid(row=0, column=0, sticky=W, padx=10, pady=5)
+    #Button22 = Button(root2, text='求二元一次方程', width=20, command = hans22).grid(row=1, column=0, sticky=W, padx=10, pady=5)
+    #Button23 = Button(root2, text='求一元二次方程', width=20, command = hans23).grid(row=2, column=0, sticky=W, padx=10, pady=5)
     
 
 #此段为金威巍所写    
@@ -429,7 +431,7 @@ def hans3():
     root3.title('分解质因数')
     root3.geometry('230x120')
     root3.resizable(0,0)
-    
+
     frame = Frame(root3)
 
     Label(root3, text = '参数名称').grid(row = 0, column = 0)
@@ -440,9 +442,9 @@ def hans3():
     e1.grid(row=1, column=1, padx=10, pady=5)
 
     v1 = StringVar()
-    e2 = Entry(root3, width=10, textvariable=v1, state='readonly').grid(row=4, column=1)
+    e2 = Entry(root3, width=15, textvariable=v1, state='readonly').grid(row=4, column=1)
 
-   def Factorize():
+    def Factorize():
         n=eval(e1.get())
         num = n
         m = []
@@ -469,6 +471,7 @@ def hans3():
         
         # 寻找输入的一个因数
         def find(n, a):
+            
             def f(x):
                 return (x * x + a) % n
             
@@ -509,12 +512,11 @@ def hans4():
     root4.title('金融计算')
     root4.geometry('240x180')
     root4.resizable(0,0)
-
     def hans41():
         root41 = Toplevel()
         root41.title('求将来资金总值')
         root41.resizable(0,0)
-        
+
         frame = Frame(root41)
 
         Label(root41, text = '参数名称').grid(row = 0, column = 0)
@@ -537,7 +539,6 @@ def hans4():
 
         def Future_Value():    #利率可以是数值
             a = np.fv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
-            a = 0 - a
             v1.set(a)
 
         Button(root41, text='将来资金总值', width=10, command = Future_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
@@ -546,7 +547,7 @@ def hans4():
         root42 = Toplevel()
         root42.title('求现在需投资资金总额')
         root42.resizable(0,0)
-        
+
         frame = Frame(root42)
 
         Label(root42, text = '参数名称').grid(row = 0, column = 0)
@@ -569,16 +570,15 @@ def hans4():
 
         def Present_Value():
             a = np.pv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
-            a = 0 - a
             v1.set(a)
 
-        Button(root42, text='求现在需投资资金总额', width=10, command = Present_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+        Button(root42, text='求现值', width=10, command = Present_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
 
     def hans43():
         root43 = Toplevel()
         root43.title('求每月利润')
         root43.resizable(0,0)
-        
+
         frame = Frame(root43)
 
         Label(root43, text = '参数名称').grid(row = 0, column = 0)
@@ -608,7 +608,7 @@ def hans4():
         root445 = Toplevel()
         root445.title('求月供本金、利息')
         root445.resizable(0,0)
-        
+
         frame = Frame(root445)
 
         Label(root445, text = '参数名称').grid(row = 0, column = 0)
@@ -635,12 +635,12 @@ def hans4():
 
 
         def Payment_Principal():    #求月供中的本金,per表示在第几个偿还期
-            a = np.ppmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = np.ppmt(eval(e1.get()), eval(e4.get()), eval(e2.get()), eval(e3.get()))
             a = 0 - a
             v1.set(a)
 
         def Payment_Interest():     #要求同上
-            a = np.ipmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = np.ipmt(eval(e1.get()), eval(e4.get()), eval(e2.get()), eval(e3.get()))
             a = 0 - a
             v2.set(a)
 
@@ -652,12 +652,12 @@ def hans4():
         root467 = Toplevel()
         root467.title('求净现值、内部回报率')
         root467.resizable(0,0)
-        
+
         frame = Frame(root467)
 
         Label(root467, text = '参数名称').grid(row = 0, column = 0)
         Label(root467, text = '值').grid(row = 0, column = 1)
-        Label(root467, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root467, text = 'rate贴现率(小数)').grid(row = 1, column = 0)
         Label(root467, text = '每日现金(输入一组数)').grid(row = 2, column = 0)
 
         e1 = Entry(root467)
@@ -687,7 +687,7 @@ def hans4():
         root48 = Toplevel()
         root48.title('求偿还年数')
         root48.resizable(0,0)
-        
+
         frame = Frame(root48)
 
         Label(root48, text = '参数名称').grid(row = 0, column = 0)
@@ -706,14 +706,14 @@ def hans4():
         e5 = Entry(root48, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
 
         def Year_nper():
-            a = np.nper(float(e1.get())), eval(e2.get()), eval(e3.get())
+            a = np.nper(float(e1.get()), eval(e2.get()), eval(e3.get()))
             a = int(a) + 1
             v1.set(a)
 
         Button(root48, text='求偿还年数', width=10, command = Year_nper).grid(row=5, column=0, sticky=W, padx=10, pady=5)
 
-
-
+    
+    
     Button1 = Button(root4, text='将来资金总值', width=15, command = hans41)
     Button1.pack()
     Button2 = Button(root4, text='现在需投资资金总额', width=15, command = hans42)
@@ -726,6 +726,14 @@ def hans4():
     Button5.pack()
     Button6 = Button(root4, text='偿还年数', width=15, command = hans48)
     Button6.pack()
+    '''
+    Button1 = Button(root4, text='将来资金总值', width=15, command = hans41).grid(row=0, column=0, sticky=W, padx=10, pady=5)
+    Button2 = Button(root4, text='现在需投资资金总额', width=15, command = hans42).grid(row=1, column=0, sticky=W, padx=10, pady=5)
+    Button3 = Button(root4, text='每月利润', width=15, command = hans43).grid(row=2, column=0, sticky=W, padx=10, pady=5)
+    Button4 = Button(root4, text='月供本金、利息', width=15, command = hans445).grid(row=3, column=0, sticky=W, padx=10, pady=5)       
+    Button5 = Button(root4, text='净现值、内部回报率', width=15, command = hans467).grid(row=4, column=0, sticky=W, padx=10, pady=5)       
+    Button6 = Button(root4, text='偿还年数', width=15, command = hans48).grid(row=5, column=0, sticky=W, padx=10, pady=5) 
+    '''      
 
 #此段为王多益所写
 def hans5():
@@ -738,7 +746,7 @@ def hans5():
         root51 = Toplevel()
         root51.title('求解定积分')
         root51.resizable(0,0)
-        
+
         frame = Frame(root51)
 
         Label(root51, text = '参数名称').grid(row = 0, column = 0)
@@ -771,7 +779,7 @@ def hans5():
         root52 = Toplevel()
         root52.title('求解不定积分')
         root52.resizable(0,0)
-        
+
         frame = Frame(root52)
 
         Label(root52, text = '参数名称').grid(row = 0, column = 0)
@@ -797,7 +805,7 @@ def hans5():
         root53 = Toplevel()
         root53.title('求解微分')
         root53.resizable(0,0)
-        
+
         frame = Frame(root53)
 
         Label(root53, text = '参数名称').grid(row = 0, column = 0)
@@ -823,14 +831,14 @@ def hans5():
         root54 = Toplevel()
         root54.title('求解微分')
         root54.resizable(0,0)
-        
+
         frame = Frame(root54)
 
         Label(root54, text = '参数名称').grid(row = 0, column = 0)
         Label(root54, text = '值').grid(row = 0, column = 1)
         Label(root54, text = '函数').grid(row = 1, column = 0)
         Label(root54, text = '积分变量').grid(row = 2, column = 0)
-        Label(root54, text = '数字').grid(row = 3, column = 0)
+        Label(root54, text = '变量值').grid(row = 3, column = 0)
 
         e1 = Entry(root54)
         e2 = Entry(root54)
@@ -851,7 +859,7 @@ def hans5():
 
 
 
-
+    
     Button51 = Button(root5, text='定积分', width=20, command = hans51)
     Button51.pack()
     Button52 = Button(root5, text='不定积分', width=20, command = hans52)
@@ -860,6 +868,10 @@ def hans5():
     Button53.pack()
     Button54 = Button(root5, text='微分(有数字)', width=20, command = hans54)
     Button54.pack()
+    #Button51 = Button(root5, text='定积分', width=10, command = hans51).grid(row=0, column=0, sticky=W, padx=10, pady=5)
+    #Button52 = Button(root5, text='不定积分', width=10, command = hans52).grid(row=1, column=0, sticky=W, padx=10, pady=5)
+    #Button53 = Button(root5, text='微分', width=10, command = hans53).grid(row=2, column=0, sticky=W, padx=10, pady=5)
+    #Button54 = Button(root5, text='微分(有数字)', width=10, command = hans54).grid(row=3, column=0, sticky=W, padx=10, pady=5)       
 
 #此段为王多益，金威巍所写，金威巍负责抽卡部分，其余部分由王多益负责
 def hans61():
@@ -867,14 +879,14 @@ def hans61():
     root61.title('游戏攻略')
     root61.geometry('250x90')
     root61.resizable(0,0)
-    
+
     frame = Frame(root61)
     
     def hans6():
         root6 = Toplevel()
         root6.title('伤害计算')
         root6.resizable(0,0)
-        
+
         frame = Frame(root6)
 
         Label(root6, text = '参数名称').grid(row = 0, column = 0)
@@ -950,10 +962,10 @@ def hans61():
 
             ATK = eval(e1.get())
             NP = eval(e2.get())
-            RGB = str(eval(e3.get()))
-            Class = str(eval(e5.get()))
-            Team = str(eval(e9.get()))
-            Weak = str(eval(e10.get()))
+            RGB = e3.get()
+            Class = e5.get()
+            Team = e9.get()
+            Weak = e10.get()
             ATKbuff = float(e11.get())
             DEFbuff = float(e12.get())
             Cardbuff = float(e13.get())
@@ -1035,12 +1047,12 @@ def hans61():
         root7 = Toplevel()
         root7.title('抽卡概率')
         root7.resizable(0,0)
-        
+
         frame = Frame(root7)
 
         Label(root7, text = '参数名称').grid(row = 0, column = 0)
         Label(root7, text = '值').grid(row = 0, column = 1)
-        Label(root7, text = 'UP率(百分数)').grid(row = 1, column = 0)
+        Label(root7, text = 'UP率(%)').grid(row = 1, column = 0)
         Label(root7, text = '抽几个').grid(row = 2, column = 0)
         Label(root7, text = '抽几次').grid(row = 3, column = 0)
 
@@ -1073,15 +1085,15 @@ def hans61():
         root8 = Toplevel()
         root8.title('模拟抽卡')
         root8.resizable(0,0)
-        
+
         frame = Frame(root8)
 
         Label(root8, text = '参数名称').grid(row = 0, column = 0)
         Label(root8, text = '值').grid(row = 0, column = 1)
-        Label(root8, text = 'UP率(小数)').grid(row = 1, column = 0)
-        Label(root8, text = 'SSR概率(小数)').grid(row = 2, column = 0)
-        Label(root8, text = 'SR概率(小数)').grid(row = 3, column = 0)
-        Label(root8, text = 'R概率(小数)').grid(row = 4, column = 0)
+        Label(root8, text = 'UP率(%)').grid(row = 1, column = 0)
+        Label(root8, text = 'SSR概率(%)').grid(row = 2, column = 0)
+        Label(root8, text = 'SR概率(%)').grid(row = 3, column = 0)
+        Label(root8, text = 'R概率(%)').grid(row = 4, column = 0)
 
         e1 = Entry(root8)
         e2 = Entry(root8)
@@ -1129,7 +1141,10 @@ def hans61():
     Button52.pack()
     Button53 = Button(root61, text='伤害计算', width=20, command = hans6)
     Button53.pack()
-    
+    #Button51 = Button(root61, text='模拟抽卡', width=10, command = hans8).grid(row=1, column=0, sticky=W, padx=10, pady=5)
+    #Button52 = Button(root61, text='抽卡概率', width=10, command = hans7).grid(row=0, column=0, sticky=W, padx=10, pady=5)
+    #Button53 = Button(root61, text='伤害计算', width=10, command = hans6).grid(row=2, column=0, sticky=W, padx=10, pady=5)
+
 Button1 = Button(root1, text='计算器', width=20, command = hans1)
 Button1.pack()
 Button2 = Button(root1, text='解方程', width=20, command = hans2)
@@ -1142,5 +1157,12 @@ Button5 = Button(root1, text='微积分', width=20, command = hans5)
 Button5.pack()
 Button6 = Button(root1, text='游戏攻略', width=20, command = hans61)
 Button6.pack()
-
+'''   
+Button1 = Button(root1, text='计算器', width=10, command = hans1).grid(row=0, column=0, sticky=W, padx=10, pady=5)
+Button2 = Button(root1, text='解方程', width=10, command = hans2).grid(row=1, column=0, sticky=W, padx=10, pady=5)
+Button3 = Button(root1, text='分解质因数', width=10, command = hans3).grid(row=2, column=0, sticky=W, padx=10, pady=5)
+Button4 = Button(root1, text='金融计算', width=10, command = hans4).grid(row=3, column=0, sticky=W, padx=10, pady=5)
+Button5 = Button(root1, text='微积分', width=10, command = hans5).grid(row=4, column=0, sticky=W, padx=10, pady=5)
+Button6 = Button(root1, text='游戏攻略', width=10, command = hans61).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+'''
 mainloop()
