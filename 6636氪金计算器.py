@@ -432,6 +432,7 @@ def hans3():
    def Factorize():
         n=eval(e1.get())
         num = n
+        m = []
         # 判断输入是否为素数
         def prime(n):
             if n in {2, 3, 5, 7, 11}:
@@ -518,7 +519,7 @@ def hans4():
         v1 = StringVar()
         e5 = Entry(root41, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
 
-        def Future_Value():    #利率可以是数值or矩阵
+        def Future_Value():    #利率可以是数值
             a = np.fv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
             a = 0 - a
             v1.set(a)
@@ -818,7 +819,7 @@ def hans5():
 #此段为王多益，金威巍所写，金威巍负责抽卡部分，其余部分由王多益负责
 def hans61():
     root61 = Toplevel()
-    root61.title('伤害计算')
+    root61.title('游戏攻略')
     frame = Frame(root61)
     
     def hans6():
