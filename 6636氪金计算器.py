@@ -611,12 +611,12 @@ def hans4():
 
 
         def Payment_Principal():    #求月供中的本金,per表示在第几个偿还期
-            a = np.ppmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = np.ppmt(eval(e1.get()), eval(e4.get()), eval(e2.get()), eval(e3.get()))
             a = 0 - a
             v1.set(a)
 
         def Payment_Interest():     #要求同上
-            a = np.ipmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = np.ipmt(eval(e1.get()), eval(e4.get()), eval(e2.get()), eval(e3.get()))
             a = 0 - a
             v2.set(a)
 
