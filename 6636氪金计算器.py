@@ -521,7 +521,6 @@ def hans4():
 
         def Future_Value():    #利率可以是数值
             a = np.fv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
-            a = 0 - a
             v1.set(a)
 
         Button(root41, text='将来资金总值', width=10, command = Future_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
@@ -551,7 +550,6 @@ def hans4():
 
         def Present_Value():
             a = np.pv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
-            a = 0 - a
             v1.set(a)
 
         Button(root42, text='求现在需投资资金总额', width=10, command = Present_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
