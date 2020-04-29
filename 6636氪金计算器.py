@@ -680,7 +680,7 @@ def hans4():
         e5 = Entry(root48, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
 
         def Year_nper():
-            a = np.nper(float(e1.get())), eval(e2.get()), eval(e3.get())
+            a = np.nper(float(e1.get()), eval(e2.get()), eval(e3.get()))
             a = int(a) + 1
             v1.set(a)
 
