@@ -346,10 +346,11 @@ def hans2():
         e6.grid(row=6, column=1, padx=10, pady=5)
 
         v1 = StringVar()
-        e4 = Entry(root22, width=10, textvariable=v1, state='readonly').grid(row=7, column=1)
+        e7 = Entry(root22, width=10, textvariable=v1, state='readonly').grid(row=7, column=1)
         
         def ans():
-            x,y = sym.symbols(str(e5.get()) + str(e6.get()))
+            x = sym.symbols(str(e5.get()))
+            y = sym.symbols(str(e6.get()))
             v1.set(sym.solve([eval(e1.get()) - eval(e2.get()),eval(e3.get()) - eval(e4.get())], [x, y]))
 
         Button(root22, text='求解', width=10, command=ans).grid(row=7, column=0, sticky=W, padx=10, pady=5)
