@@ -164,7 +164,7 @@ def hans1():
     def log1(entry):
         input = entry.get()
         num2= float(input.strip())
-        temp = math.log(a, num2)
+        temp = math.log(num2, a)
         b = round(temp, 4)
         clear(entry)
         entry.insert(END, b)
